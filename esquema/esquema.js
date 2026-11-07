@@ -1,0 +1,151 @@
+db.createCollection("directores", {
+  validator: {
+    $jsonSchema: {
+      bsonType: "object",
+      required: [
+        "idDirector",
+        "nombre",
+        "apellido",
+        "pais",
+        "fechaNacimiento"
+      ],
+      properties: {
+        idDirector: {
+          bsonType: "int",
+          description: "ID único del director"
+        },
+        nombre: {
+          bsonType: "string"
+        },
+        apellido: {
+          bsonType: "string"
+        },
+        pais: {
+          bsonType: "string"
+        },
+        fechaNacimiento: {
+          bsonType: "date"
+        },
+        premios: {
+          bsonType: "array",
+          items: {
+            bsonType: "string"
+          }
+        }
+      }
+    }
+  }
+});
+
+db.directores.createIndex(
+    { idDirector: 1 },
+    { unique: true }
+);
+
+db.createCollection("peliculas", {
+  validator: {
+    $jsonSchema: {
+      bsonType: "object",
+      required: [
+        "idPelicula",
+        "titulo",
+        "anioEstreno",
+        "genero",
+        "duracion",
+        "idDirector"
+      ],
+      properties: {
+        idPelicula: {
+          bsonType: "int"
+        },
+        titulo: {
+          bsonType: "string"
+        },
+        anioEstreno: {
+          bsonType: "int",
+          minimum: 1900
+        },
+        genero: {
+          bsonType: "string"
+        },
+        duracion: {
+          bsonType: "int",
+          minimum: 1
+        },
+        idDirector: {
+          bsonType: "int"
+        },
+        idioma: {
+          bsonType: "string"
+        },
+        clasificacion: {
+          bsonType: "string"
+        },
+        paisProduccion: {
+          bsonType: "string"
+        }
+      }
+    }
+  }
+});
+
+db.peliculas.createIndex(
+    { idPelicula: 1 },
+    { unique: true }
+);
+
+db.peliculas.createIndex(
+    { idDirector: 1 }
+);
+
+db.createCollection("resenas", {
+  validator: {
+    $jsonSchema: {
+      bsonType: "object",
+      required: [
+        "idPelicula",
+        "usuario",
+        "calificacion",
+        "comentario",
+        "fechaResena"
+      ],
+      properties: {
+
+        idPelicula: {
+          bsonType: "int"
+        },
+
+        usuario: {
+          bsonType: "string"
+        },
+
+        calificacion: {
+          bsonType: "int",
+          minimum: 1,
+          maximum: 5
+        },
+
+        comentario: {
+          bsonType: "string"
+        },
+
+        fechaResena: {
+          bsonType: "date"
+        },
+
+        utilidad: {
+          bsonType: "int",
+          minimum: 0
+        }
+      }
+    }
+  }
+});
+
+db.resenas.createIndex(
+    { idPelicula: 1 }
+);
+
+db.resenas.createIndex(
+    { fechaResena: 1 }
+);
