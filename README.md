@@ -28,30 +28,22 @@ proyecto/
 │
 ├── models/
 │   ├── director.py
+│   ├── resena.py
 │   └── pelicula.py
 │
 ├── routes/
+│   ├── dashboard.py
 │   ├── directores.py
 │   └── peliculas.py
 │
 └── services/
+    ├── dashboard_service.py
     ├── director_service.py
     └── pelicula_service.py 
 ├── dashboard/
-│
-├── app.py
-│
-├── pages/
-│   ├── Resumen.py
-│   ├── Peliculas.py
-│   ├── Directores.py
-│   └── Resenas.py
-│
-├── services/
-│   └── api.py
-│
+│   └── app.py
 └── utils/
-└── docker-compose.yml
+    └── serializer.py
 ```
 ## Inicio rápido
 
